@@ -63,16 +63,22 @@ setup_git() {
     fi
 }
 
+setup_alacritty() {
+    title "Setting up Alacritty"
+    # TODO: error check
+    ln -s "${DOTFILES}/alacritty/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
+}
+
 setup_neovim() {
     title "Setting up Neovim"
-    INIT_PATH="${HOME}/.config/nvim"
-    if [ ! -d ${INIT_PATH} ]; then
-        mkdir -p INIT_PATH
+    INIT_PATH="${HOME}/.config"
+    if [ -d "${INIT_PATH}/nvim" ]; then
+        mv "${INIT_PATH}/nvim" /tmp/
     fi
-    if [ -f "${DOTFILES}/nvim/init.lua" ]; then
-        ln -s "${DOTFILES}/nvim/init.lua" "${INIT_PATH}/init.lua"
+    if [ -d "${DOTFILES}/nvim" ]; then
+        ln -s "${DOTFILES}/nvim" "${INIT_PATH}"
     else
-        error "init.lua not found!"
+        error "nvim config not found!"
     fi
 }
 
@@ -83,24 +89,10 @@ case "$1" in
     git)
         setup_git
         ;;
-    homebrew)
-        setup_homebrew
-        ;;
-    shell)
-        setup_shell
-        ;;
-    terminfo)
-        setup_terminfo
-        ;;
-    macos)
-        setup_macos
-        ;;
-    catppuccin)
-        fetch_catppuccin_theme
-        ;;
     all)
         setup_git
         setup_neovim
+        setup_alacritty
         ;;
     *)
         echo -e $"\nUsage: $(basename "$0") {git|neovim|all}\n"

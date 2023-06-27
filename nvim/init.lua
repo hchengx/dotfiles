@@ -4,8 +4,10 @@ vim.cmd [[
   set fileencodings=ucs-bom,utf-8,default,latin1 "默认值
 ]]
 
+
 -- 不在 ~/.config/nvim/
-vim.opt.runtimepath:append(',~/.dotfiles/nvim')
+-- vim.opt.runtimepath:append(',~/.dotfiles/nvim')
+-- the directory `~/.dotfiles/nvim` should be soft link rather then `init.lua` file
 require "user.options"
 require "user.lualine"
 require "user.plugins"
@@ -17,4 +19,5 @@ require "user.treesitter"
 require "user.autopairs"
 require "user.nvim-tree"
 require "user.bufferline"
+require "user.comment"
 require "user.keymaps"

@@ -10,7 +10,7 @@ keymap("", "<Space>", "<Nop>", opts)                           -- 清除空格�
 vim.g.mapleader = " "                                          -- 映射空格为leader键
 vim.g.maplocalleader = " "
 
--- Modes
+--   Modes
 --   normal_mode = "n",
 --   insert_mode = "i",
 --   visual_mode = "v",
